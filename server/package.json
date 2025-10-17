@@ -20,9 +20,10 @@
     "typescript": "^5.8.3"
   },
   "scripts": {
-    "start": "node index.ts",
+    "prestart": "npm run build",
+    "start": "node dist/node index.ts",
     "dev": "ts-node src/index.ts",
     "build": "tsc",
-    "type": "module"
+    "type": "module"  
   }
 }
