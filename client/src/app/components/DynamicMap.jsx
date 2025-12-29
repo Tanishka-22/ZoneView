@@ -14,8 +14,12 @@ export default function DynamicMap({ projects = [] }) {
   const mapRef = useRef(null);
 
   useEffect(() => {
+    let isMounted = true;
+
     // Import Leaflet dynamically
     import('leaflet').then((leaflet) => {
+      if (!isMounted) return;
+
       setL(leaflet.default);
 
       // Create custom icon
@@ -26,13 +30,17 @@ export default function DynamicMap({ projects = [] }) {
         popupAnchor: [1, -34]
       });
       setPinIcon(icon);
+    }).catch((error) => {
+      console.error('Failed to load Leaflet:', error);
     });
 
     // Handle window resize for mobile
     const handleResize = () => {
-      if (mapRef.current) {
+      if (mapRef.current && isMounted) {
         setTimeout(() => {
-          mapRef.current.invalidateSize();
+          if (mapRef.current) {
+            mapRef.current.invalidateSize();
+          }
         }, 100);
       }
     };
@@ -41,6 +49,7 @@ export default function DynamicMap({ projects = [] }) {
 
     // Cleanup function
     return () => {
+      isMounted = false;
       window.removeEventListener('resize', handleResize);
       if (mapRef.current) {
         mapRef.current = null;
