@@ -74,15 +74,15 @@ export default function ProjectList() {
   };
 
   return (
-    <div className="h-screen flex flex-col md:flex-row animate-fade-in">
+    <div className="flex flex-col md:flex-row animate-fade-in">
       <div className="md:w-auto w-full md:h-full">
         <FilterSidebar setProjects={setProjects} setCurrentPage={setCurrentPage} />
       </div>
-      <div className="p-4 md:p-8 w-full md:h-full overflow-y-auto">
+      <div className="p-4 md:p-8 w-full h-full md:h-full overflow-y-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
           <div>
             <h2 className="text-3xl font-bold text-foreground">Projects</h2>
-            <p className="text-muted-foreground mt-1">Manage and track your construction projects</p>
+            <p className="text-muted-foreground mt-1">Manage and track your projects</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
             <div className="relative">

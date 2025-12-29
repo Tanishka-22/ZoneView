@@ -83,10 +83,10 @@ if (!data) return <p className="p-6">Error loading analytics...</p>;
 return (
 <div className="p-4 md:p-8 space-y-8 overflow-auto h-full animate-fade-in">
 <h1 className="text-3xl font-bold text-foreground mb-2">Analytics Dashboard</h1>
-<p className="text-muted-foreground mb-8">Comprehensive insights into your project portfolio</p>
+<p className="text-muted-foreground mb-8">Comprehensive insights into the project portfolio</p>
 
     {/* KPI Summary Cards */}
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
     <Card className="hover-lift animate-scale-in" style={{animationDelay: '0.1s'}}>
       <CardContent className="pt-6">
         <div className="flex items-center justify-between">

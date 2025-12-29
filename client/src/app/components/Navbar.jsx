@@ -34,7 +34,7 @@ export default function Navbar() {
 
 	return (
 		<header className="border-b shadow-sm bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 animate-fade-in">
-			<div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 py-3">
+			<div className="w-full mx-auto flex items-center justify-between px-4 py-3">
 				<Link href="/" className="flex items-center space-x-2 text-xl font-bold text-primary hover-lift transition-all">
 					<MapPin className="h-6 w-6" />
 					<span>ZoneView</span>

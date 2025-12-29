@@ -26,6 +26,17 @@ export function FilterSidebar({
   const [loading, setLoading] = useState(false);
   const [options, setOptions] = useState({});
   const [isCollapsed, setIsCollapsed] = useState(false);
+
+  useEffect(() => {
+    // Set collapsed by default on mobile
+    const checkMobile = () => {
+      setIsCollapsed(window.innerWidth < 768); // md breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   const [activeFiltersCount, setActiveFiltersCount] = useState(0);
 
   const filterLabels = {
@@ -90,7 +101,26 @@ export function FilterSidebar({
   };
 
   return (
-    <div className="w-full md:w-[255px] h-screen flex flex-col border-r bg-card animate-fade-in">
+    <>
+      {/* Mobile Floating Toggle Button */}
+      {isCollapsed && (
+        <Button
+          onClick={() => setIsCollapsed(false)}
+          className="md:hidden fixed top-20 right-4 z-40 bg-primary text-primary-foreground shadow-lg hover-lift"
+          size="sm"
+        >
+          <Filter className="h-4 w-4 mr-2" />
+          Filters
+          {activeFiltersCount > 0 && (
+            <Badge variant="secondary" className="ml-2 text-xs">
+              {activeFiltersCount}
+            </Badge>
+          )}
+        </Button>
+      )}
+
+      {/* Sidebar */}
+      <div className={`w-full md:w-[255px] h-screen md:h-screen flex flex-col border-r bg-card animate-fade-in ${isCollapsed ? 'hidden md:flex' : 'flex'}`}>
       <div className="p-4 border-b bg-background/95 backdrop-blur sticky top-0 z-10">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
@@ -125,7 +155,7 @@ export function FilterSidebar({
         </div>
       </div>
 
-      <div className={`flex-1 overflow-y-auto p-4 space-y-4 ${isCollapsed ? 'hidden md:block' : ''}`}>
+      <div className={`${isCollapsed ? 'hidden' : 'flex-1'} overflow-y-auto p-4 space-y-4`}>
         {loading && (
           <div className="absolute inset-0 bg-background/50 z-10 flex items-center justify-center backdrop-blur-sm">
             <div className="text-center">
@@ -229,6 +259,7 @@ export function FilterSidebar({
         )}
       </div>
     </div>
+    </>
   );
 }
 

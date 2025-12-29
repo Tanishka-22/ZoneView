@@ -112,16 +112,18 @@ export default function HomePage() {
 
         {/* Map */}
         <div className="flex-1 overflow-hidden relative">
-          {loading ? (
-            <div className="h-full flex items-center justify-center bg-muted/20">
-              <div className="text-center">
-                <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-primary" />
-                <p className="text-muted-foreground">Loading project map...</p>
+          <div className="h-[70vh] md:h-full w-full">
+            {loading ? (
+              <div className="h-full flex items-center justify-center bg-muted/20">
+                <div className="text-center">
+                  <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-primary" />
+                  <p className="text-muted-foreground">Loading project map...</p>
+                </div>
               </div>
-            </div>
-          ) : (
-            <ProjectMap projects={projects} />
-          )}
+            ) : (
+              <ProjectMap projects={projects} />
+            )}
+          </div>
         </div>
       </div>
     </div>
